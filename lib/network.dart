@@ -4,14 +4,10 @@ import 'package:network/user_service.dart';
 export 'user_service.dart';
 
 class Network {
-  late final Dio dio;
-  late final UserService userService;
+  final Dio dio;
+  final UserService userService;
+  // final ShopService shopService;
 
-  Network({String baseUrl = 'https://api.matule.ru/api'}) {
-    dio = Dio(BaseOptions(baseUrl: baseUrl));
-
-    userService = UserService(dio: dio);
-  }
+  Network({required this.dio}) : userService = UserService(dio: dio);
+  // shopService = ShopService(dio: dio);
 }
-
-final pocketbase = Network();
