@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:network/core/api_client.dart';
+import 'package:network/entity/response_user.dart';
 import 'package:network/entity/user.dart';
 
 class UserApi {
@@ -44,7 +45,7 @@ class UserApi {
     }
   }
 
-  Future<User> usersAuthWithPassword({
+  Future<ResponseUser> usersAuthWithPassword({
     required String email,
     required String password,
   }) async {
