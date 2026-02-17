@@ -53,7 +53,7 @@ class UserApi {
 
     try {
       final response = await dioClient.post(
-        '/collections/users/auth-with-passwords',
+        '/collections/users/auth-with-password',
         data: data,
       );
       if (response.statusCode == 200) {
