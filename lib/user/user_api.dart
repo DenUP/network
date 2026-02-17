@@ -57,7 +57,7 @@ class UserApi {
         data: data,
       );
       if (response.statusCode == 200) {
-        return User.fromJson(response.data);
+        return ResponseUser.fromJson(response.data);
       } else {
         throw Exception(response.statusCode);
       }
