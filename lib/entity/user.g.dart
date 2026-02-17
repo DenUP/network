@@ -1,16 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'record.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Record _$RecordFromJson(Map<String, dynamic> json) => _Record(
+_User _$UserFromJson(Map<String, dynamic> json) => _User(
   collectionId: json['collectionId'] as String?,
   collectionName: json['collectionName'] as String?,
   created: json['created'] as String?,
-  firstName: json['firstName'] as String?,
   emailVisibility: json['emailVisibility'] as bool?,
   firstname: json['firstname'] as String?,
   id: json['id'] as String?,
@@ -22,11 +21,10 @@ _Record _$RecordFromJson(Map<String, dynamic> json) => _Record(
   gender: json['gender'] as String?,
 );
 
-Map<String, dynamic> _$RecordToJson(_Record instance) => <String, dynamic>{
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   'collectionId': instance.collectionId,
   'collectionName': instance.collectionName,
   'created': instance.created,
-  'firstName': instance.firstName,
   'emailVisibility': instance.emailVisibility,
   'firstname': instance.firstname,
   'id': instance.id,

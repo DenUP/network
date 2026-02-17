@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:network/user_service.dart';
+import 'package:network/user/user_api.dart';
 
-export 'user_service.dart';
+export 'user/user_api.dart';
 
 class Network {
   final Dio dio;
-  final UserService userService;
-  // final ShopService shopService;
+  late UserApi userApi;
 
-  Network({required this.dio}) : userService = UserService(dio: dio);
-  // shopService = ShopService(dio: dio);
+  Network({required this.dio}) {
+    userApi = UserApi(dioClient: dio);
+  }
 }
