@@ -19,7 +19,7 @@ class UserApi {
     };
 
     try {
-      final response = await dioClient.get(
+      final response = await dioClient.post(
         '/collections/users/records',
         data: data,
       );
