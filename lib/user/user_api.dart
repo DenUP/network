@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:network/core/api_client.dart';
 import 'package:network/entity/response_user.dart';
 import 'package:network/entity/user.dart';
+import 'package:network/entity/user_auth_paginator.dart';
 
 class UserApi {
   final Dio dioClient;
@@ -76,4 +77,7 @@ class UserApi {
       throw Exception(e);
     }
   }
+  // Future<UserAuthPaginator> authOriginsRecords({
+
+  // })
 }

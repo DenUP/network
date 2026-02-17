@@ -10,4 +10,8 @@ class Network {
   Network({required this.dio}) {
     userApi = UserApi(dioClient: dio);
   }
+
+  void setAuthToken(String token) {
+    dio.options.headers['Authorization'] = 'Bearer $token';
+  }
 }
