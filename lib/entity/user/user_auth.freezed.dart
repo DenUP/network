@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserAuth {
 
- String? get id; String? get collectionId; String? get collectionName; String? get created; String? get updated; String? get collectionRef; String? get fingerprint; String? get recordRef;
+ String get id; String get collectionId; String get collectionName; String get created; String get updated; String get collectionRef; String get fingerprint; String get recordRef;
 /// Create a copy of UserAuth
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserAuthCopyWith<$Res>  {
   factory $UserAuthCopyWith(UserAuth value, $Res Function(UserAuth) _then) = _$UserAuthCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? collectionId, String? collectionName, String? created, String? updated, String? collectionRef, String? fingerprint, String? recordRef
+ String id, String collectionId, String collectionName, String created, String updated, String collectionRef, String fingerprint, String recordRef
 });
 
 
@@ -65,17 +65,17 @@ class _$UserAuthCopyWithImpl<$Res>
 
 /// Create a copy of UserAuth
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? collectionId = freezed,Object? collectionName = freezed,Object? created = freezed,Object? updated = freezed,Object? collectionRef = freezed,Object? fingerprint = freezed,Object? recordRef = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? updated = null,Object? collectionRef = null,Object? fingerprint = null,Object? recordRef = null,}) {
   return _then(_self.copyWith(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,collectionId: freezed == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
-as String?,collectionName: freezed == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
-as String?,created: freezed == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
-as String?,updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
-as String?,collectionRef: freezed == collectionRef ? _self.collectionRef : collectionRef // ignore: cast_nullable_to_non_nullable
-as String?,fingerprint: freezed == fingerprint ? _self.fingerprint : fingerprint // ignore: cast_nullable_to_non_nullable
-as String?,recordRef: freezed == recordRef ? _self.recordRef : recordRef // ignore: cast_nullable_to_non_nullable
-as String?,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as String,updated: null == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as String,collectionRef: null == collectionRef ? _self.collectionRef : collectionRef // ignore: cast_nullable_to_non_nullable
+as String,fingerprint: null == fingerprint ? _self.fingerprint : fingerprint // ignore: cast_nullable_to_non_nullable
+as String,recordRef: null == recordRef ? _self.recordRef : recordRef // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? collectionId,  String? collectionName,  String? created,  String? updated,  String? collectionRef,  String? fingerprint,  String? recordRef)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String collectionId,  String collectionName,  String created,  String updated,  String collectionRef,  String fingerprint,  String recordRef)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserAuth() when $default != null:
 return $default(_that.id,_that.collectionId,_that.collectionName,_that.created,_that.updated,_that.collectionRef,_that.fingerprint,_that.recordRef);case _:
@@ -181,7 +181,7 @@ return $default(_that.id,_that.collectionId,_that.collectionName,_that.created,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? collectionId,  String? collectionName,  String? created,  String? updated,  String? collectionRef,  String? fingerprint,  String? recordRef)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String collectionId,  String collectionName,  String created,  String updated,  String collectionRef,  String fingerprint,  String recordRef)  $default,) {final _that = this;
 switch (_that) {
 case _UserAuth():
 return $default(_that.id,_that.collectionId,_that.collectionName,_that.created,_that.updated,_that.collectionRef,_that.fingerprint,_that.recordRef);case _:
@@ -201,7 +201,7 @@ return $default(_that.id,_that.collectionId,_that.collectionName,_that.created,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? collectionId,  String? collectionName,  String? created,  String? updated,  String? collectionRef,  String? fingerprint,  String? recordRef)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String collectionId,  String collectionName,  String created,  String updated,  String collectionRef,  String fingerprint,  String recordRef)?  $default,) {final _that = this;
 switch (_that) {
 case _UserAuth() when $default != null:
 return $default(_that.id,_that.collectionId,_that.collectionName,_that.created,_that.updated,_that.collectionRef,_that.fingerprint,_that.recordRef);case _:
@@ -219,14 +219,14 @@ class _UserAuth implements UserAuth {
   const _UserAuth({required this.id, required this.collectionId, required this.collectionName, required this.created, required this.updated, required this.collectionRef, required this.fingerprint, required this.recordRef});
   factory _UserAuth.fromJson(Map<String, dynamic> json) => _$UserAuthFromJson(json);
 
-@override final  String? id;
-@override final  String? collectionId;
-@override final  String? collectionName;
-@override final  String? created;
-@override final  String? updated;
-@override final  String? collectionRef;
-@override final  String? fingerprint;
-@override final  String? recordRef;
+@override final  String id;
+@override final  String collectionId;
+@override final  String collectionName;
+@override final  String created;
+@override final  String updated;
+@override final  String collectionRef;
+@override final  String fingerprint;
+@override final  String recordRef;
 
 /// Create a copy of UserAuth
 /// with the given fields replaced by the non-null parameter values.
@@ -261,7 +261,7 @@ abstract mixin class _$UserAuthCopyWith<$Res> implements $UserAuthCopyWith<$Res>
   factory _$UserAuthCopyWith(_UserAuth value, $Res Function(_UserAuth) _then) = __$UserAuthCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? collectionId, String? collectionName, String? created, String? updated, String? collectionRef, String? fingerprint, String? recordRef
+ String id, String collectionId, String collectionName, String created, String updated, String collectionRef, String fingerprint, String recordRef
 });
 
 
@@ -278,17 +278,17 @@ class __$UserAuthCopyWithImpl<$Res>
 
 /// Create a copy of UserAuth
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? collectionId = freezed,Object? collectionName = freezed,Object? created = freezed,Object? updated = freezed,Object? collectionRef = freezed,Object? fingerprint = freezed,Object? recordRef = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? updated = null,Object? collectionRef = null,Object? fingerprint = null,Object? recordRef = null,}) {
   return _then(_UserAuth(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,collectionId: freezed == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
-as String?,collectionName: freezed == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
-as String?,created: freezed == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
-as String?,updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
-as String?,collectionRef: freezed == collectionRef ? _self.collectionRef : collectionRef // ignore: cast_nullable_to_non_nullable
-as String?,fingerprint: freezed == fingerprint ? _self.fingerprint : fingerprint // ignore: cast_nullable_to_non_nullable
-as String?,recordRef: freezed == recordRef ? _self.recordRef : recordRef // ignore: cast_nullable_to_non_nullable
-as String?,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as String,updated: null == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as String,collectionRef: null == collectionRef ? _self.collectionRef : collectionRef // ignore: cast_nullable_to_non_nullable
+as String,fingerprint: null == fingerprint ? _self.fingerprint : fingerprint // ignore: cast_nullable_to_non_nullable
+as String,recordRef: null == recordRef ? _self.recordRef : recordRef // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

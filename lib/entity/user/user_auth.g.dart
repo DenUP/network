@@ -7,14 +7,14 @@ part of 'user_auth.dart';
 // **************************************************************************
 
 _UserAuth _$UserAuthFromJson(Map<String, dynamic> json) => _UserAuth(
-  id: json['id'] as String?,
-  collectionId: json['collectionId'] as String?,
-  collectionName: json['collectionName'] as String?,
-  created: json['created'] as String?,
-  updated: json['updated'] as String?,
-  collectionRef: json['collectionRef'] as String?,
-  fingerprint: json['fingerprint'] as String?,
-  recordRef: json['recordRef'] as String?,
+  id: json['id'] as String,
+  collectionId: json['collectionId'] as String,
+  collectionName: json['collectionName'] as String,
+  created: json['created'] as String,
+  updated: json['updated'] as String,
+  collectionRef: json['collectionRef'] as String,
+  fingerprint: json['fingerprint'] as String,
+  recordRef: json['recordRef'] as String,
 );
 
 Map<String, dynamic> _$UserAuthToJson(_UserAuth instance) => <String, dynamic>{

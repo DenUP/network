@@ -9,18 +9,19 @@ part 'user.g.dart';
 @freezed
 abstract class User with _$User {
   const factory User({
-    required String? collectionId,
-    required String? collectionName,
-    required String? created,
-    required bool? emailVisibility,
-    required String? firstname,
-    required String? id,
-    required String? lastname,
-    required String? secondname,
-    required String? updated,
-    required bool? verified,
-    required String? datebirthday,
-    required String? gender,
+    required String collectionId,
+    required String collectionName,
+    required String created,
+    required String email,
+    required bool emailVisibility,
+    required String firstname,
+    required String id,
+    required String lastname,
+    required String secondname,
+    required String updated,
+    required bool verified,
+    required String datebirthday,
+    required String gender,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
