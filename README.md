@@ -1,39 +1,209 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# `network` – клиентская библиотека для Matule 2026
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+[![Dart SDK](https://img.shields.io/badge/dart-%3E%3D3.0.0-blue)](https://dart.dev)
+[![Powered by PocketBase](https://img.shields.io/badge/powered%20by-PocketBase-blueviolet)](https://pocketbase.io)
+[![Профессионалы 2026](https://img.shields.io/badge/чемпионат-Профессионалы%202026-ff69b4)](https://pro.firpo.ru)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+Библиотека для взаимодействия с API сервера мобильного приложения **Matule 2026**, разрабатываемого в рамках чемпионата «Профессионалы». Предоставляет готовые сервисы и модели данных для работы с бэкендом на базе **PocketBase**.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## 📦 Возможности
 
-## Features
+- ⚡️ Основана на мощном HTTP-клиенте [`dio`](https://pub.dev/packages/dio).
+- 🧩 Модели данных генерируются с помощью `freezed` – иммутабельность и удобная сериализация JSON.
+- 🔐 Автоматическое добавление JWT-токена в заголовки после аутентификации.
+- 🖼️ Загрузка файлов через `multipart/form-data` (например, изображения для проектов).
+- ✅ Интеграционные тесты, проверяющие работу с реальным сервером.
+- 🧱 Чёткое разделение на сервисы по функциональным модулям.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## 🔧 Требования
 
-## Getting started
+- **Dart SDK** `>=3.0.0`
+- **Flutter** (только для запуска тестов)
+- Развёрнутый сервер PocketBase (см. раздел [Связанные проекты](#связанные-проекты))
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## 🚀 Установка
 
-## Usage
+Добавьте зависимость в `pubspec.yaml` вашего проекта:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+```yaml
+dependencies:
+  network:
+    git:
+      url: https://github.com/DenUP/network.git
+      ref: main
+  dio: ^5.4.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
-```dart
-const like = 'sample';
+dev_dependencies:
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
+  flutter_test:
+    sdk: flutter
 ```
 
-## Additional information
+Затем выполните:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+flutter pub get
+```
+
+Если вы вносили изменения в `freezed`-классы, сгенерируйте код:
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+## ⚙️ Настройка
+
+Перед использованием создайте экземпляр `Dio` с базовым URL вашего сервера и при необходимости добавьте токен авторизации.
+
+```dart
+import 'package:dio/dio.dart';
+import 'package:network/user_service.dart';
+import 'package:network/shop_service.dart';
+import 'package:network/project_service.dart';
+import 'package:network/basket_service.dart';
+
+final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8090/api'));
+
+// После успешного входа токен можно установить так:
+dio.options.headers['Authorization'] = 'Bearer $token';
+
+// Создание сервисов
+final userService = UserService(dio: dio);
+final shopService = ShopService(dio: dio);
+final projectService = ProjectService(dio: dio);
+final basketService = BasketService(dio: dio);
+```
+
+## 📁 Структура проекта
+
+```
+lib/
+├── entity/               # Модели данных
+│   ├── user/             # Пользователи (User, ResponseAuth, UserAuthList)
+│   ├── shop/             # Товары и новости (Product, ResponseProducts, ResponsesNews)
+│   ├── project/          # Проекты (Project, ResponsesProject)
+│   └── basket/           # Корзина (ResponseCart)
+├── user_service.dart      # Сервис пользователей
+├── shop_service.dart      # Сервис магазина (товары, новости)
+├── project_service.dart   # Сервис проектов
+├── basket_service.dart    # Сервис корзины
+└── network.dart           # (Опционально) обёртка для инициализации
+```
+
+## 📘 Примеры использования
+
+### 🔐 Авторизация и получение профиля
+
+```dart
+// Вход
+final auth = await userService.userLogIn(
+  email: 'user@example.com',
+  password: '12345678',
+);
+
+// Устанавливаем токен для всех последующих запросов
+dio.options.headers['Authorization'] = 'Bearer ${auth.token}';
+
+// Получаем данные пользователя по ID
+final user = await userService.userRecordsIdUser(idUser: auth.record.id);
+print('Привет, ${user.email}!');
+```
+
+### 🖼️ Создание проекта с изображением
+
+```dart
+import 'dart:io';
+import 'package:dio/dio.dart';
+
+// Подготовка файла
+final imageFile = File('path/to/project.jpg');
+final multipartFile = await MultipartFile.fromFile(
+  imageFile.path,
+  filename: 'project.jpg',
+  contentType: DioMediaType('image', 'jpeg'),
+);
+
+// Создание проекта
+final newProject = await projectService.addProject(
+  title: 'Мой проект',
+  typeProject: 'Разработка',
+  user_id: userId,
+  dateStart: '2025-10-05',
+  dateEnd: '2025-10-06',
+  gender: 'Male',
+  description_source: 'Описание проекта',
+  category: 'IT',
+  image: multipartFile,
+);
+
+print('Проект создан, ID: ${newProject.id}');
+```
+
+### 🔍 Поиск товаров
+
+```dart
+final products = await shopService.searchProduct('футболка');
+for (var item in products.items) {
+  print('${item.title} – ${item.price} руб.');
+}
+```
+
+### 🛒 Работа с корзиной
+
+```dart
+// Создание записи в корзине
+final cartItem = await basketService.addBasket(
+  user_id: userId,
+  product_id: productId,
+  count: 2,
+);
+
+// Изменение количества
+final updated = await basketService.editBasket(
+  id_bucket: cartItem.id,
+  user_id: userId,
+  product_id: productId,
+  count: 3,
+);
+```
+
+## 🧪 Тестирование
+
+В библиотеке реализованы интеграционные тесты, которые обращаются к реальному серверу PocketBase.
+
+### Подготовка
+
+1. Убедитесь, что сервер доступен по адресу `http://192.168.1.146:8090` (при необходимости измените `baseUrl` в тестах).
+2. В базе должен существовать пользователь `test21@test.ru` с паролем `12345678`.  
+   Если его нет – создайте вручную или раскомментируйте тест регистрации.
+
+### Запуск
+
+```bash
+flutter test test/
+```
+
+Тесты используют общий экземпляр `Dio`, авторизация выполняется один раз в `setUpAll`. В консоль выводятся токены и идентификаторы для отладки.
+
+## 🔗 Связанные проекты
+
+| Проект | Описание | Ссылка |
+|--------|----------|--------|
+| **Сервер (PocketBase + Docker)** | Готовое окружение для локального развёртывания бэкенда | [GitHub](https://github.com/DenUP/my-pocketbase-docker-matule) |
+| **UI-kit** | Дизайн-система приложения (виджеты, цвета, типографика) | [GitHub](https://github.com/DenUP/ui_kit) |
+| **Макет в Figma** | Дизайн мобильного приложения Matule 2026 | [Figma](https://www.figma.com/design/pbwY6r5TtWUkxMsoJBWf0c/Matule-2026?node-id=17-229) |
+| **Основное приложение** | Репозиторий самого приложения (в разработке) | – |
+
+## 📄 Лицензия
+
+Проект распространяется под лицензией **MIT**. Это означает, что вы можете свободно использовать, копировать, изменять, объединять, публиковать, распространять, сублицензировать и/или продавать копии данного программного обеспечения при соблюдении следующих условий:
+
+- Уведомление об авторских правах и сам текст лицензии должны быть включены во все копии или значимые части программного обеспечения.
+
+**Отказ от ответственности:** ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ПРЕДОСТАВЛЯЕТСЯ «КАК ЕСТЬ», БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ, ВКЛЮЧАЯ, НО НЕ ОГРАНИЧИВАЯСЬ, ГАРАНТИЯМИ ТОВАРНОЙ ПРИГОДНОСТИ, СООТВЕТСТВИЯ ПО ЕГО КОНКРЕТНОМУ НАЗНАЧЕНИЮ И ОТСУТСТВИЯ НАРУШЕНИЙ ПРАВ. НИ В КАКОМ СЛУЧАЕ АВТОРЫ ИЛИ ПРАВООБЛАДАТЕЛИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ПО КАКИМ-ЛИБО ИСКАМ, ЗА УЩЕРБ ИЛИ ПО ИНЫМ ТРЕБОВАНИЯМ, В ТОМ ЧИСЛЕ, ПРИ ДЕЙСТВИИ КОНТРАКТА, ДЕЛИКТЕ ИЛИ ИНОЙ СИТУАЦИИ, ВОЗНИКШИМ ИЗ-ЗА ИСПОЛЬЗОВАНИЯ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ ИЛИ ИНЫХ ДЕЙСТВИЙ С НИМ.
+
+Полный текст лицензии доступен в файле [LICENSE](LICENSE) в корне репозитория.
