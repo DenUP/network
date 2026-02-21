@@ -94,11 +94,7 @@ void main() {
       expect(
         () => userService.userDel(idUser: userId),
         throwsA(
-          isA<DioError>().having(
-            (e) => e.response?.statusCode,
-            'statusCode',
-            404,
-          ),
+          predicate((e) => e is DioException && e.response?.statusCode == 404),
         ),
       );
     });
