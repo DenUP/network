@@ -1,16 +1,11 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network/entity/project/project.dart';
 import 'package:network/entity/project/responses_project.dart';
-import 'package:network/entity/shop/product.dart';
-import 'package:network/entity/shop/response_products.dart';
-import 'package:network/entity/shop/responses_news.dart';
 import 'package:network/project_service.dart';
 
-import 'package:network/shop_service.dart';
 import 'package:network/user_service.dart';
 
 void main() {

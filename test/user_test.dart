@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network/entity/user/response_auth.dart';
 import 'package:network/entity/user/user.dart';
 
-import 'package:network/network.dart';
 import 'package:network/user_service.dart';
 
 void main() {

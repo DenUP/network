@@ -1,27 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:network/basket_service.dart';
-import 'package:network/entity/basket/response_cart.dart';
+import 'package:network/entity/order/response_order.dart';
+import 'package:network/entity/order_service.dart';
 import 'package:network/shop_service.dart';
 
 import 'package:network/user_service.dart';
 
 void main() {
-  group('Проверка Basket', () {
+  group('Проверка Order', () {
     late Dio dio;
     late UserService userService;
-    late BasketService basketService;
+    late OrderService orderService;
     late ShopService shopService;
     late String token;
     late String user_id;
     late String product_id;
-    late String id_bucket;
 
     setUpAll(() async {
       dio = Dio();
       dio.options.baseUrl = 'http://192.168.1.146:8090/api';
       userService = UserService(dio: dio);
-      basketService = BasketService(dio: dio);
+      orderService = OrderService(dio: dio);
       shopService = ShopService(dio: dio);
 
       // Выполняю логин для того чтобы получить токен для всех тестов
@@ -39,25 +38,13 @@ void main() {
       final product = await shopService.searchProduct('');
       product_id = product.items.first.id;
     });
-    test('Создание корзины', () async {
-      final res = await basketService.addBasket(
+    test('Создание заказа', () async {
+      final res = await orderService.addOrder(
         user_id: user_id,
         product_id: product_id,
-        count: 1,
+        count: 123,
       );
-      id_bucket = res.id;
-      expect(res, isA<ResponseCart>());
-    });
-
-    test('Изменение корзины', () async {
-      final res = await basketService.editBasket(
-        id_bucket: id_bucket,
-        user_id: user_id,
-        product_id: product_id,
-        count: 1,
-      );
-
-      expect(res, isA<ResponseCart>());
+      expect(res, isA<ResponseOrder>());
     });
   });
 }
