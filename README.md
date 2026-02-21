@@ -194,7 +194,7 @@ flutter test test/
 | Проект | Описание | Ссылка |
 |--------|----------|--------|
 | **Сервер (PocketBase + Docker)** | Готовое окружение для локального развёртывания бэкенда | [GitHub](https://github.com/DenUP/my-pocketbase-docker-matule) |
-| **UI-kit** | Дизайн-система приложения (виджеты, цвета, типографика) | [GitHub](https://github.com/DenUP/ui_kit) |
+| **UI-kit** | Дизайн-система приложения (виджеты, цвета, типографика) | [GitHub](https://github.com/DenUP/matule2026_ui_kit) |
 | **Макет в Figma** | Дизайн мобильного приложения Matule 2026 | [Figma](https://www.figma.com/design/pbwY6r5TtWUkxMsoJBWf0c/Matule-2026?node-id=17-229) |
 | **Основное приложение** | Репозиторий самого приложения (в разработке) | – |
 
