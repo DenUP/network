@@ -15,7 +15,7 @@ void main() {
     final userService = UserService(dio: dio);
     test('Регистрация пользователя (Изменить Email)', () async {
       final res = await userService.userRecords(
-        email: 'test21123@test.ru',
+        email: 'test${DateTime.now().millisecond}@test.ru',
         password: '12345678',
       );
       expect(res, isA<User>());
