@@ -9,40 +9,47 @@ void main() {
   group('User Service', () {
     String token;
     String userId;
+
     final dio = Dio();
     dio.options.baseUrl = 'http://192.168.1.146:8090/api';
     final userService = UserService(dio: dio);
     test('Регистрация пользователя (Изменить Email)', () async {
       final res = await userService.userRecords(
-        email: 'test${DateTime.now().millisecond}@test.ru',
+        email: 'test_${DateTime.now().microsecond}@ya.ru',
         password: '12345678',
       );
       expect(res, isA<User>());
     });
 
     test('Получение информации о пользователе', () async {
-      final auth = await userService.userLogIn(
-        email: 'test21@test.ru',
-        password: '12345678',
-      );
-      userId = auth.record.id;
-      token = auth.token;
-      expect(token, isA<String>());
-      dio.options.headers['Authorization'] = 'Bearer $token';
-      final res = await userService.userRecordsIdUser(
-        idUser: '402k8b9z79jv5wa',
-      );
-      expect(res, isA<User>());
-    });
+      final email = 'test_${DateTime.now().microsecond}@ya.ru';
+      await userService.userRecords(email: email, password: '12345678');
 
-    test('Изменения профиля', () async {
-      final email = 'test21@test.ru';
       final auth = await userService.userLogIn(
         email: email,
         password: '12345678',
       );
       userId = auth.record.id;
       token = auth.token;
+      expect(token, isA<String>());
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      final res = await userService.userRecordsIdUser(idUser: userId);
+      expect(res, isA<User>());
+    });
+
+    test('Изменения профиля', () async {
+      final email = 'test_${DateTime.now().microsecond}@ya.ru';
+      await userService.userRecords(email: email, password: '12345678');
+
+      final auth = await userService.userLogIn(
+        email: email,
+        password: '12345678',
+      );
+      userId = auth.record.id;
+      token = auth.token;
+      dio.options.headers['Authorization'] = 'Bearer $token';
+
+      print(token);
       final user = auth.record;
       final res = await userService.userChanges(
         idUser: userId,

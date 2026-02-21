@@ -23,14 +23,14 @@ void main() {
       userService = UserService(dio: dio);
       basketService = BasketService(dio: dio);
       shopService = ShopService(dio: dio);
-
+      final email = 'test_${DateTime.now().microsecond}@yandex.ru';
+      await userService.userRecords(email: email, password: '12345678');
       // Выполняю логин для того чтобы получить токен для всех тестов
       final auth = await userService.userLogIn(
-        email: 'test21@test.ru',
+        email: email,
         password: '12345678',
       );
       token = auth.token;
-      print(token);
       user_id = auth.record.id;
 
       dio.options.headers['Authorization'] = 'Bearer $token';

@@ -9,7 +9,7 @@ import 'package:network/project_service.dart';
 import 'package:network/user_service.dart';
 
 void main() {
-  group('Проверка Shop', () {
+  group('Проверка Project', () {
     late Dio dio;
     late UserService userService;
     late ProjectService projectService;

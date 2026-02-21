@@ -96,6 +96,7 @@ class UserService {
     final response = await dio.get('/collections/_authOrigins/records');
 
     if (response.statusCode == 200) {
+     
       return UserAuthList.fromJson(response.data);
     } else {
       throw Exception(response.statusCode);
