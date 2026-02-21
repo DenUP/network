@@ -12,7 +12,7 @@ abstract class User with _$User {
     required String collectionId,
     required String collectionName,
     required String created,
-    required String email,
+    String? email,
     required bool emailVisibility,
     required String firstname,
     required String id,

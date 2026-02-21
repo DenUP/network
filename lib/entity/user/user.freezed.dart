@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get collectionId; String get collectionName; String get created; String get email; bool get emailVisibility; String get firstname; String get id; String get lastname; String get secondname; String get updated; bool get verified; String get datebirthday; String get gender;
+ String get collectionId; String get collectionName; String get created; String? get email; bool get emailVisibility; String get firstname; String get id; String get lastname; String get secondname; String get updated; bool get verified; String get datebirthday; String get gender;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String collectionId, String collectionName, String created, String email, bool emailVisibility, String firstname, String id, String lastname, String secondname, String updated, bool verified, String datebirthday, String gender
+ String collectionId, String collectionName, String created, String? email, bool emailVisibility, String firstname, String id, String lastname, String secondname, String updated, bool verified, String datebirthday, String gender
 });
 
 
@@ -65,13 +65,13 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? email = null,Object? emailVisibility = null,Object? firstname = null,Object? id = null,Object? lastname = null,Object? secondname = null,Object? updated = null,Object? verified = null,Object? datebirthday = null,Object? gender = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? email = freezed,Object? emailVisibility = null,Object? firstname = null,Object? id = null,Object? lastname = null,Object? secondname = null,Object? updated = null,Object? verified = null,Object? datebirthday = null,Object? gender = null,}) {
   return _then(_self.copyWith(
 collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
 as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
 as String,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,emailVisibility: null == emailVisibility ? _self.emailVisibility : emailVisibility // ignore: cast_nullable_to_non_nullable
+as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,emailVisibility: null == emailVisibility ? _self.emailVisibility : emailVisibility // ignore: cast_nullable_to_non_nullable
 as bool,firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,lastname: null == lastname ? _self.lastname : lastname // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String collectionId,  String collectionName,  String created,  String email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String collectionId,  String collectionName,  String created,  String? email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.collectionId,_that.collectionName,_that.created,_that.email,_that.emailVisibility,_that.firstname,_that.id,_that.lastname,_that.secondname,_that.updated,_that.verified,_that.datebirthday,_that.gender);case _:
@@ -186,7 +186,7 @@ return $default(_that.collectionId,_that.collectionName,_that.created,_that.emai
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String collectionId,  String collectionName,  String created,  String email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String collectionId,  String collectionName,  String created,  String? email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.collectionId,_that.collectionName,_that.created,_that.email,_that.emailVisibility,_that.firstname,_that.id,_that.lastname,_that.secondname,_that.updated,_that.verified,_that.datebirthday,_that.gender);case _:
@@ -206,7 +206,7 @@ return $default(_that.collectionId,_that.collectionName,_that.created,_that.emai
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String collectionId,  String collectionName,  String created,  String email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String collectionId,  String collectionName,  String created,  String? email,  bool emailVisibility,  String firstname,  String id,  String lastname,  String secondname,  String updated,  bool verified,  String datebirthday,  String gender)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.collectionId,_that.collectionName,_that.created,_that.email,_that.emailVisibility,_that.firstname,_that.id,_that.lastname,_that.secondname,_that.updated,_that.verified,_that.datebirthday,_that.gender);case _:
@@ -221,13 +221,13 @@ return $default(_that.collectionId,_that.collectionName,_that.created,_that.emai
 @JsonSerializable()
 
 class _User implements User {
-  const _User({required this.collectionId, required this.collectionName, required this.created, required this.email, required this.emailVisibility, required this.firstname, required this.id, required this.lastname, required this.secondname, required this.updated, required this.verified, required this.datebirthday, required this.gender});
+  const _User({required this.collectionId, required this.collectionName, required this.created, this.email, required this.emailVisibility, required this.firstname, required this.id, required this.lastname, required this.secondname, required this.updated, required this.verified, required this.datebirthday, required this.gender});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String collectionId;
 @override final  String collectionName;
 @override final  String created;
-@override final  String email;
+@override final  String? email;
 @override final  bool emailVisibility;
 @override final  String firstname;
 @override final  String id;
@@ -271,7 +271,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String collectionId, String collectionName, String created, String email, bool emailVisibility, String firstname, String id, String lastname, String secondname, String updated, bool verified, String datebirthday, String gender
+ String collectionId, String collectionName, String created, String? email, bool emailVisibility, String firstname, String id, String lastname, String secondname, String updated, bool verified, String datebirthday, String gender
 });
 
 
@@ -288,13 +288,13 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? email = null,Object? emailVisibility = null,Object? firstname = null,Object? id = null,Object? lastname = null,Object? secondname = null,Object? updated = null,Object? verified = null,Object? datebirthday = null,Object? gender = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? collectionId = null,Object? collectionName = null,Object? created = null,Object? email = freezed,Object? emailVisibility = null,Object? firstname = null,Object? id = null,Object? lastname = null,Object? secondname = null,Object? updated = null,Object? verified = null,Object? datebirthday = null,Object? gender = null,}) {
   return _then(_User(
 collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
 as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
 as String,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,emailVisibility: null == emailVisibility ? _self.emailVisibility : emailVisibility // ignore: cast_nullable_to_non_nullable
+as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,emailVisibility: null == emailVisibility ? _self.emailVisibility : emailVisibility // ignore: cast_nullable_to_non_nullable
 as bool,firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,lastname: null == lastname ? _self.lastname : lastname // ignore: cast_nullable_to_non_nullable

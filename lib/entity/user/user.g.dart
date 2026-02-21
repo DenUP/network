@@ -10,7 +10,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   collectionId: json['collectionId'] as String,
   collectionName: json['collectionName'] as String,
   created: json['created'] as String,
-  email: json['email'] as String,
+  email: json['email'] as String?,
   emailVisibility: json['emailVisibility'] as bool,
   firstname: json['firstname'] as String,
   id: json['id'] as String,

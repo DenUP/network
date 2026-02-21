@@ -102,17 +102,13 @@ class UserService {
     }
   }
 
-  Future<void> userDel({
-    required String idUser,
-    // Получение id Token
-  }) async {
-    final id_token = idUser;
+  Future<void> userDel({required String idUser}) async {
     final response = await dio.delete(
-      '/collections/_authOrigins/records/$id_token',
+      '/collections/users/records/$idUser', // обратите внимание: это удаляет запись аутентификации, а не пользователя
     );
-
-    if (response.data != 204) {
-      throw Exception(response.statusCode);
+    if (response.statusCode != 204) {
+      // обычно DELETE возвращает 204 No Content
+      throw Exception('Failed to delete: ${response.statusCode}');
     }
   }
 }

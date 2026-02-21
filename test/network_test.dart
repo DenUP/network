@@ -15,7 +15,7 @@ void main() {
     final userService = UserService(dio: dio);
     test('Регистрация пользователя (Изменить Email)', () async {
       final res = await userService.userRecords(
-        email: 'test21@test.ru',
+        email: 'test21123@test.ru',
         password: '12345678',
       );
       expect(res, isA<User>());
@@ -37,8 +37,9 @@ void main() {
     });
 
     test('Изменения профиля', () async {
+      final email = 'test21@test.ru';
       final auth = await userService.userLogIn(
-        email: 'test21@test.ru',
+        email: email,
         password: '12345678',
       );
       userId = auth.record.id;
@@ -46,7 +47,7 @@ void main() {
       final user = auth.record;
       final res = await userService.userChanges(
         idUser: userId,
-        email: auth.record.email,
+        email: email,
         emailVisibility: user.emailVisibility,
         firstname: 'Denis',
         lastname: 'Denisovich',
@@ -68,24 +69,38 @@ void main() {
 
     test('Удаления пользователя', () async {
       // Регистрация
-      final email = 'test_${DateTime.now().microsecond}@yandex.ru';
+      final email = 'test_${DateTime.now().microsecondsSinceEpoch}@yandex.ru';
       final reg = await userService.userRecords(
         email: email,
         password: '12345678',
       );
+      print(email);
+      final userId = reg.id; // предположим, что в модели User есть id
 
-      //Авторизация
+      // Авторизация
       final auth = await userService.userLogIn(
         email: email,
         password: '12345678',
       );
       final token = auth.token;
       dio.options.headers['Authorization'] = 'Bearer $token';
-      final userId = auth.record.id;
-      // Удаление профиля
-      // final res = await userService.userDel(idUser: userId);
 
-      // expect(res, isA<ResponseAuth>());
+      // Удаление пользователя (используем правильный метод)
+      await userService.userDel(
+        idUser: userId,
+      ); // или userDel, если это удаление пользователя
+
+      // Проверяем, что повторное удаление вызывает 404
+      expect(
+        () => userService.userDel(idUser: userId),
+        throwsA(
+          isA<DioError>().having(
+            (e) => e.response?.statusCode,
+            'statusCode',
+            404,
+          ),
+        ),
+      );
     });
   });
 }
