@@ -52,7 +52,7 @@ void main() {
         firstname: 'Denis',
         lastname: 'Denisovich',
         secondname: 'Denisovichhh',
-        datebirthday: '',
+        datebirthday: '2026-02-26',
         gender: 'Male',
       );
       expect(res, isA<User>());
